@@ -4,4 +4,5 @@ Rebbity
 A new and creative tag to-do list app.
 
 Splash screenshot:
-![image](http://github.com/realcome/Rebbity/raw/master/screenshot/splash.jpg)
+
+![](https://github.com/realcome/Rebbity/blob/master/screenshot/splash.jpg)
