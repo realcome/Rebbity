@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap android:gravity="fill_horizontal|top|center" android:src="@drawable/rainbow_shadow" />
+    </item>
+    <item android:top="@dimen/splash_rainbow_height">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/milk" />
+        </shape>
+    </item>
+    <item>
+        <bitmap android:gravity="bottom|center" android:src="@drawable/author_text" />
+    </item>
+</layer-list>
