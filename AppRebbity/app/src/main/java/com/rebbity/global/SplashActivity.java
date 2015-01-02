@@ -2,7 +2,6 @@ package com.rebbity.global;
 
 import android.os.Bundle;
 
-
 /**
  * Created by Tyler on 15/1/1.
  */

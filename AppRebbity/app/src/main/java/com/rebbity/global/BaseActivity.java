@@ -3,6 +3,7 @@ package com.rebbity.global;
 import com.rebbity.config.APP_PREF;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast; // TYLER_TODO
 
@@ -33,4 +34,20 @@ public class BaseActivity extends ActionBarActivity{
 	public static boolean changeStartState(Context context){
 		return APP_PREF.ChangeFirst(context);
 	}
+
+    public static boolean isSupportTransStatusBar(){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT){
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean isSupportMaterialDesign(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            return true;
+        }
+
+        return false;
+    }
 }

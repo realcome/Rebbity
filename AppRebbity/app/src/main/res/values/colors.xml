@@ -12,4 +12,10 @@
     <color name="white">#ffffffff</color>
     <color name="gray_dark">#ff818486</color>
     <color name="milk">#fff8f6e9</color>
+
+    <item name="rainbow_red" type="color">@color/red_light</item>
+    <item name="rainbow_green" type="color">@color/green_light</item>
+    <item name="rainbow_blue" type="color">@color/skyblue_light</item>
+    <item name="rainbow_gold" type="color">@color/orange_light</item>
+    <item name="rainbow_gap" type="color">@color/milk</item>
 </resources>

@@ -29,7 +29,7 @@ public class VToolBar extends VLinearLayout{
 		// TODO Auto-generated constructor stub
 		TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.VToolBar);
 		// TYLER_TODO
-		//setHasRainbowBar(arr.getBoolean(R.attr.hasRainbowAnimBar, false));
+		//setIsRainbowified(arr.getBoolean(R.attr.hasRainbowAnimBar, false));
 		setTitle(arr.getString(R.attr.title));// TYLER_TODO: title pos.
 		// TYLER_TODO
 		//setTitleAlign(arr.getInteger(R.attr.titleAlign, 0));
@@ -41,6 +41,10 @@ public class VToolBar extends VLinearLayout{
 		super(context);
 		// TODO Auto-generated constructor stub
 	}
+
+    public void setIsRainbowified(boolean has){
+        //if (has == true && )
+    }
 	
 	@Override
 	protected boolean verifyDrawable(Drawable who) {
