@@ -29,16 +29,6 @@ public class ShadowView extends View{
 		super(context, attrs, defStyleAttr);
 		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	protected int[] onCreateDrawableState(int extraSpace) {
-		// TODO Auto-generated method stub
-		
-		int[] arrayOfInt = super.onCreateDrawableState(extraSpace + 2);
-	    //mergeDrawableStates(arrayOfInt, n.b(this));
-		// TYLER_TODO
-	    return arrayOfInt;
-	}
 	
 	private int getRealWidth(int measureSpec){
 		int ret;
@@ -54,7 +44,6 @@ public class ShadowView extends View{
 		}
 		
 		ret = Math.min(ret, size);
-		//BaseActivity.showToast(getContext(), "w: "+ret, Toast.LENGTH_LONG);
 		return ret;
 	}
 	
@@ -104,8 +93,7 @@ public class ShadowView extends View{
 	}
 
 	@Override
-	protected void onLayout(boolean changed, int left, int top, int right,
-			int bottom) {
+	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
 		// TODO Auto-generated method stub
 		super.onLayout(changed, left, top, right, bottom);
 		if(changed == true){
