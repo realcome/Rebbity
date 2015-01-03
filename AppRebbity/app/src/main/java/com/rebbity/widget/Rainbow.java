@@ -97,6 +97,10 @@ public class Rainbow extends Drawable {
     }
 
     private int getCirculationIndex(int index, int length){
+        if (index < 0){
+            return index + length;
+        }
+
         if (index > length - 1){
             return index % length;
         }
@@ -109,7 +113,7 @@ public class Rainbow extends Drawable {
             int index_curr;
             int index_next;
 
-            index_curr = getCirculationIndex(time_piece_i, g_color_paints.length);
+            index_curr = getCirculationIndex(time_piece_i - 1, g_color_paints.length);
             index_next = getCirculationIndex(index_curr + 1, g_color_paints.length);
 
             m_paint_curr = g_color_paints[index_curr];
@@ -226,19 +230,17 @@ public class Rainbow extends Drawable {
         float top = rect.top;
         float left = rect.left;
 
+        RainbowParams time_params = null;
+        time_params = this.m_time_params;
+        RainbowParams.getParams(time_params, this.m_start_time, this.m_time_offset);
 
+        changeState(time_params);
 
         if(this.m_state == STATE_IDLE){
             drawColorBar(canvas, left, top, width, height);
             return;
         }
 
-
-        RainbowParams time_params = null;
-        time_params = this.m_time_params;
-        RainbowParams.getParams(time_params, this.m_start_time, this.m_time_offset);
-
-        changeState(time_params);
         updatePieceWidth(time_params, width);
         updatePaint(time_params.timePieceI);
 
