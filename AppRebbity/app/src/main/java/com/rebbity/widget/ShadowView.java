@@ -1,6 +1,6 @@
 package com.rebbity.widget;
 
-import com.rebbity.global.BaseActivity;
+import com.rebbity.cn.BaseActivity;
 
 import android.app.Service;
 import android.content.Context;

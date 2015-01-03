@@ -1,4 +1,4 @@
-package com.rebbity.global;
+package com.rebbity.cn;
 
 import android.content.Intent;
 import android.os.Bundle;

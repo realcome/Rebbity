@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rebbity.global"
+    package="com.rebbity.cn"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -10,11 +10,12 @@
 
     <application
         android:allowBackup="true"
+        android:name="com.rebbity.cn.RebbityApp"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".StartActivity"
+            android:name="com.rebbity.cn.StartActivity"
             android:label="@string/app_name"
             android:theme="@style/AppFullScreen" >
             <intent-filter>
@@ -24,11 +25,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GuideActivity"
+            android:name="com.rebbity.cn.GuideActivity"
             android:theme="@style/AppFullScreen" >
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name="com.rebbity.cn.SplashActivity"
             android:theme="@style/AppFullScreen" >
         </activity>
 

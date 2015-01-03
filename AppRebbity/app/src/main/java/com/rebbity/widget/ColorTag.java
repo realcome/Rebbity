@@ -184,7 +184,7 @@ public class ColorTag extends View{
 
 		int cx = getWidth() / 2;
 		int cy = getHeight() / 2;
-		
+
 		// draw inner circle
 		this.mPaint.setStyle(Style.FILL);
 		this.mPaint.setColor(mCurColor);

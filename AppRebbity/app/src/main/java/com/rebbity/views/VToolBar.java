@@ -1,6 +1,8 @@
 package com.rebbity.views;
 
 import java.util.Locale;
+
+import com.rebbity.widget.Rainbow;
 import com.rebbity.widget.ShadowView;
 
 import android.content.Context;
@@ -10,7 +12,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
-import com.rebbity.global.R;
+import com.rebbity.cn.R;
 
 public class VToolBar extends VLinearLayout{
 	private Paint mPaint;
@@ -23,6 +25,11 @@ public class VToolBar extends VLinearLayout{
 	private Locale mLocale = null;
 	
 	private ColorStateList aa;// TYLRE_TODO:rename
+
+
+    // Rainbow animate.
+    private Rainbow mRainbowAnime = null;
+
 	
 	public VToolBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -42,8 +49,27 @@ public class VToolBar extends VLinearLayout{
 		// TODO Auto-generated constructor stub
 	}
 
+    /**
+     * operations about rainbow animate progress bar.
+     * @param has
+     */
     public void setIsRainbowified(boolean has){
-        //if (has == true && )
+        if (has && this.mRainbowAnime != null){
+            return;
+        }
+
+        if (has){
+            this.mRainbowAnime = new Rainbow(this);
+            this.mRainbowAnime.setState(getDrawableState());
+        }else{
+            if (this.mRainbowAnime != null){
+                this.mRainbowAnime.setCallback(null);
+            }
+
+            this.mRainbowAnime = null;
+        }
+
+
     }
 	
 	@Override

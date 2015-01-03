@@ -2,15 +2,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/splash" 
+    android:id="@+id/splash"
     android:background="@drawable/splash_bg" >
 
     <ImageView 
         android:id="@+id/logo"
         android:contentDescription="logo"
         android:layout_width="fill_parent" 
-        android:layout_height="fill_parent" 
+        android:layout_height="fill_parent"
         android:src="@drawable/splash_logo" 
         android:scaleType="center" />
+    <com.rebbity.widget.RainbowBar
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:id="@+id/rainbowbar"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:id="@+id/start"
+        android:text="start"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:id="@+id/stop"
+        android:text="stop"/>
 </RelativeLayout>

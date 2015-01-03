@@ -1,4 +1,4 @@
-package com.rebbity.global;
+package com.rebbity.cn;
 
 import android.os.Bundle;
 import android.view.Menu;

@@ -3,4 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="splash_rainbow_height">10.0dip</dimen>
+
+    <dimen name="rainbow_bar_height">5.0dip</dimen>
 </resources>

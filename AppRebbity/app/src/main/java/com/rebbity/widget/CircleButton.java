@@ -14,7 +14,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.ImageView;
-import com.rebbity.global.R;
+import com.rebbity.cn.R;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB) 
 public class CircleButton extends ImageView {

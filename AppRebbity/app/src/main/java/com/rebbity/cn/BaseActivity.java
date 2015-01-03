@@ -1,4 +1,4 @@
-package com.rebbity.global;
+package com.rebbity.cn;
 
 import com.rebbity.config.APP_PREF;
 
@@ -25,9 +25,9 @@ public class BaseActivity extends ActionBarActivity{
 	
 	public static Class<?> getStartActivity(Context context){
 		if(APP_PREF.IsFirst(context)){
-			return com.rebbity.global.GuideActivity.class;
+			return com.rebbity.cn.GuideActivity.class;
 		}else{
-			return com.rebbity.global.SplashActivity.class;
+			return com.rebbity.cn.SplashActivity.class;
 		}
 	}
 	

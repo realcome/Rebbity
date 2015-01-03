@@ -1,4 +1,4 @@
-package com.rebbity.global;
+package com.rebbity.cn;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Context;
 /**
  * Created by Tyler on 15/1/2.
  */
-public class GlobalApp extends Application {
+public class RebbityApp extends Application {
     private static Context g_context = null;
 
     @Override
