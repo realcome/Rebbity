@@ -21,15 +21,15 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header android:fragment="com.rebbity.cn.SettingsActivity$GeneralPreferenceFragment"
-        android:title="@string/perf_header_general" />
+        android:title="@string/pref_header_general" />
 
     <header android:fragment="com.rebbity.cn.SettingsActivity$DataSyncPreferenceFragment"
-        android:title="@string/perf_header_data_sync" />
+        android:title="@string/pref_header_data_sync" />
 
     <header android:fragment="com.rebbity.cn.SettingsActivity$ListPreferenceFragment"
-        android:title="@string/perf_header_list" />
+        android:title="@string/pref_header_list" />
 
     <header android:fragment="com.rebbity.cn.SettingsActivity$AboutPreferenceFragment"
-        android:title="@string/perf_header_about" />
+        android:title="@string/pref_header_about" />
 
 </preference-headers>

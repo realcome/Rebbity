@@ -7,25 +7,25 @@
 
 
     <!-- Rebbity for Settings -->
-    <string name="perf_title">Settings</string>
-    <string name="perf_header_account">Account</string>
-    <string name="perf_header_general">General</string>
-    <string name="perf_header_data_sync">Data And Sync</string>
-    <string name="perf_header_list">List</string>
-    <string name="perf_header_about">About</string>
+    <string name="pref_title">Settings</string>
+    <string name="pref_header_account">Account</string>
+    <string name="pref_header_general">General</string>
+    <string name="pref_header_data_sync">Data And Sync</string>
+    <string name="pref_header_list">List</string>
+    <string name="pref_header_about">About</string>
 
 
     <!-- Account -->
-    <string name="perf_title_log_out">Log out</string>
-    <string name="perf_title_premium">Premium</string>
+    <string name="pref_title_log_out">Log out</string>
+    <string name="pref_title_premium">Premium</string>
 
     <!-- General -->
-    <string name="perf_title_live_blur">Live blur</string>
-    <string name="perf_desc_live_blur">Opened it, you will see amazing live blur effect.It may cost more power.</string>
+    <string name="pref_title_live_blur">Live blur</string>
+    <string name="pref_desc_live_blur">Opened it, you will see amazing live blur effect.It may cost more power.</string>
 
     <!-- Data & Sync -->
-    <string name="perf_title_sync_when_start">Sync when app opened</string>
-    <string name="perf_title_auto_sync_frequency">Auto sync frequency</string>
+    <string name="pref_title_sync_when_start">Sync when app opened</string>
+    <string name="pref_title_auto_sync_frequency">Auto sync frequency</string>
     <string-array name="pref_items_title_sync_frequency">
         <item>Once a day</item>
         <item>Twice a day</item>
@@ -34,9 +34,9 @@
         <item>0</item>
         <item>1</item>
     </string-array>
-    <string name="perf_title_data_clean">Clean data</string>
+    <string name="pref_title_data_clean">Clean data</string>
 
-    <string name="perf_title_sort_by_time">Sort by time.</string>
+    <string name="pref_title_sort_by_time">Sort by time.</string>
     <string-array name="pref_items_title_sort_by_time">
         <item>Latest First</item>
         <item>Oldest First</item>
@@ -46,13 +46,13 @@
         <item>1</item>
     </string-array>
 
-    <string name="perf_title_sort_by_tag">Sort by tag</string>
+    <string name="pref_title_sort_by_tag">Sort by tag</string>
 
     <!-- About -->
-    <string name="perf_title_copyright">Copyright</string>
-    <string name="perf_desc_copyright">Designed by rebbity.inc</string>
-    <string name="perf_title_version">Rebbity Alpha</string>
-    <string name="perf_desc_thanks">Thank you for downloading. Enjoy!</string>
+    <string name="pref_title_copyright">Copyright</string>
+    <string name="pref_desc_copyright">Designed by rebbity.inc</string>
+    <string name="pref_title_version">Rebbity Alpha</string>
+    <string name="pref_desc_thanks">Thank you for downloading. Enjoy!</string>
 
 
 

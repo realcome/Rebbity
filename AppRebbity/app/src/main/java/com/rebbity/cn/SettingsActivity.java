@@ -85,20 +85,20 @@ public class SettingsActivity extends PreferenceActivity {
         // Add 'data and sync' preferences, and a corresponding header.
         PreferenceCategory fakeHeader = new PreferenceCategory(this);
         fakeHeader = new PreferenceCategory(this);
-        fakeHeader.setTitle(R.string.perf_header_data_sync);
+        fakeHeader.setTitle(R.string.pref_header_data_sync);
         getPreferenceScreen().addPreference(fakeHeader);
         addPreferencesFromResource(R.xml.pref_data_sync);
 
 
         // Add 'list' preferences, and a corresponding header.
         fakeHeader = new PreferenceCategory(this);
-        fakeHeader.setTitle(R.string.perf_header_list);
+        fakeHeader.setTitle(R.string.pref_header_list);
         getPreferenceScreen().addPreference(fakeHeader);
         addPreferencesFromResource(R.xml.pref_list);
 
         // Add 'list' preferences, and a corresponding header.
         fakeHeader = new PreferenceCategory(this);
-        fakeHeader.setTitle(R.string.perf_header_about);
+        fakeHeader.setTitle(R.string.pref_header_about);
         getPreferenceScreen().addPreference(fakeHeader);
         addPreferencesFromResource(R.xml.pref_about);
 
