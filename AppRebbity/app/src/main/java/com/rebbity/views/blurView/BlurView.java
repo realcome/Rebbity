@@ -18,10 +18,31 @@
 
 package com.rebbity.views.blurView;
 
+import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 
 /**
  * Created by Tyler on 15/1/10.
  */
-public class BlurView{
+public class BlurView extends View{
+    private boolean m_pref_blur_enable;
+
+    public BlurView(Context context) {
+        super(context);
+    }
+
+    public BlurView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context, attrs, 0);
+    }
+
+    public BlurView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context, attrs, defStyleAttr);
+    }
+
+    private void init(Context context, AttributeSet attrs, int defStyleAttr){
+        
+    }
 }
