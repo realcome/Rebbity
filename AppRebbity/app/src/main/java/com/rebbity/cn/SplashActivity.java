@@ -1,5 +1,6 @@
 package com.rebbity.cn;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -54,6 +55,8 @@ public class SplashActivity extends BaseActivity {
             public void onClick(View v) {
                 Rainbow anime = bar.getRainbow();
                 anime.stop();
+
+                startActivity(new Intent(SplashActivity.this, SettingsActivity.class));
             }
         });
 
