@@ -23,7 +23,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -91,10 +90,7 @@ public class ColorSwitch  extends CompoundButton implements View.OnClickListener
     private float mThumbPosition;
     private int mThumbWidth;
 
-
     private Drawable mTrackDrawable;
-    private float mTouchInWholeX;
-    private float mTouchInWholeY;
     private int mTouchMode;
     private int mTouchSlop;
     private float mTouchX;
@@ -103,9 +99,6 @@ public class ColorSwitch  extends CompoundButton implements View.OnClickListener
     private static final int[] CHECKED_STATE_SET = {
             android.R.attr.state_checked
     };
-
-
-
 
     private Animation mPositionAnimator;
 
@@ -167,8 +160,7 @@ public class ColorSwitch  extends CompoundButton implements View.OnClickListener
         setState(isChecked());
     }
 
-    private int calcDrawWidth(float paramFloat)
-    {
+    private int calcDrawWidth(float paramFloat) {
         float f1 = this.mThumbLeftMargin;
         float f2 = (this.mOnThumbWidth - this.mOffThumbWidth) / (0.1f + this.mAnimationLength + this.mThumbLeftMargin);
         return (int)(this.mOffThumbWidth - f1 * f2 + paramFloat * f2);
@@ -242,7 +234,7 @@ public class ColorSwitch  extends CompoundButton implements View.OnClickListener
     }
 
     /**
-     * @return true if (x, y) is within the target area of the switch thumb
+     * @return true if (x, y) is within the target area of the switch
      */
     private boolean hitSwitch(float x, float y)
     {
@@ -509,6 +501,9 @@ public class ColorSwitch  extends CompoundButton implements View.OnClickListener
         }
     }
 
+    /**
+     * @return true if (x, y) is within the target area of the switch thumb
+     */
     private boolean hitThumb(float x, float y) {
         float limitleft = Math.max(mSwitchLeft, mSwitchLeft + mTempRect.left + mThumbPosition + mThumbLeftMargin);
         float limitright = limitleft + mThumbWidth;
