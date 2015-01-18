@@ -47,7 +47,6 @@ public class ColorSwitch  extends CompoundButton implements View.OnClickListener
     private Drawable mIdleThumbDrawable;
     private int mAnimationLength;
 
-    private int mMinFlingVelocity;
     private Drawable mOffThumbDrawable;
     private int mThumbLeftMargin;
     private int mOffThumbWidth;
@@ -152,7 +151,6 @@ public class ColorSwitch  extends CompoundButton implements View.OnClickListener
 
         final ViewConfiguration config = ViewConfiguration.get(context);
         mTouchSlop = config.getScaledTouchSlop();
-        mMinFlingVelocity = config.getScaledMinimumFlingVelocity();
 
         setClickable(true);
         refreshDrawableState();
@@ -261,13 +259,9 @@ public class ColorSwitch  extends CompoundButton implements View.OnClickListener
         // Commit the change if the event is up and not canceled and the switch
         // has not been disabled during the drag.
         final boolean commitChange = ev.getAction() == MotionEvent.ACTION_UP && isEnabled();
-        boolean newState = false;
+        boolean newState;
         if (commitChange) {
-            mVelocityTracker.computeCurrentVelocity(1000);
-            final float xvel = mVelocityTracker.getXVelocity();
-            if (Math.abs(xvel) > mMinFlingVelocity) {
-                newState = getTargetCheckedState();
-            }
+            newState = getTargetCheckedState();
         } else {
             newState = isChecked();
         }
@@ -432,7 +426,6 @@ public class ColorSwitch  extends CompoundButton implements View.OnClickListener
         if (mAnimRunning) {
             return;
         }
-
 
         if (getWindowToken() != null) {
             animateThumbToCheckedState(checked);
