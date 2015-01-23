@@ -24,4 +24,9 @@
         app:offThumbDrawable="@drawable/color_switch_anim_thumb_off_selector"
         app:trackDrawable="@drawable/color_switch_anim_bg_default"/>
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list"></ListView>
+
 </RelativeLayout>

@@ -2,7 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="splash_rainbow_height">10.0dip</dimen>
+    <dimen name="splash_rainbow_height">6.0dip</dimen>
 
-    <dimen name="rainbow_bar_height">15.0dip</dimen>
+    <dimen name="rainbow_bar_height">3.0dip</dimen>
 </resources>
