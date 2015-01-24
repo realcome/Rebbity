@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.rebbity.widget.Rainbow;
 import com.rebbity.widget.RainbowBar;

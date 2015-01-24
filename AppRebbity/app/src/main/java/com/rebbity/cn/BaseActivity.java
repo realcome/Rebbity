@@ -29,19 +29,19 @@ import android.widget.Toast; // TYLER_TODO
  * Created by Tyler on 15/1/1.
  */
 public class BaseActivity extends ActionBarActivity{
-	public static Toast showToast(Context context, String text, int duration){
+	public static Toast showToast(Context context, String text, int duration) {
 		// This function is used for debug log display.
 		Toast.makeText(context, text, duration).show();
 		return null;
 	}
 	
-	public static Toast showToast(Context context, int res, int duration){
+	public static Toast showToast(Context context, int res, int duration) {
 		// This function is used for debug log display.
 		Toast.makeText(context, res, duration).show();
 		return null;
 	}
 	
-	public static Class<?> getStartActivity(Context context){
+	public static Class<?> getStartActivity(Context context) {
 		if(APP_PREF.IsFirst(context)){
 			return com.rebbity.cn.GuideActivity.class;
 		}else{
@@ -49,11 +49,11 @@ public class BaseActivity extends ActionBarActivity{
 		}
 	}
 	
-	public static boolean changeStartState(Context context){
+	public static boolean changeStartState(Context context) {
 		return APP_PREF.ChangeFirst(context);
 	}
 
-    public static boolean isSupportTransStatusBar(){
+    public static boolean isSupportTransStatusBar() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT){
             return false;
         }
@@ -61,7 +61,7 @@ public class BaseActivity extends ActionBarActivity{
         return true;
     }
 
-    public static boolean isSupportMaterialDesign(){
+    public static boolean isSupportMaterialDesign() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             return true;
         }

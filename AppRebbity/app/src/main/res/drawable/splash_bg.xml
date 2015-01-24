@@ -12,6 +12,6 @@
         </shape>
     </item>
     <item>
-        <bitmap android:gravity="bottom|center" android:src="@drawable/stack_shadow" />
+        <bitmap android:gravity="fill_horizontal|bottom|center" android:src="@drawable/stack_shadow" />
     </item>
 </layer-list>
