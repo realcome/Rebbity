@@ -1,4 +1,4 @@
-package com.rebbity.widget;
+package com.rebbity.widget.rainbow;
 
 import android.os.SystemClock;
 

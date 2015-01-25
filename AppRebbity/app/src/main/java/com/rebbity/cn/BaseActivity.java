@@ -22,14 +22,20 @@ import com.rebbity.config.APP_PREF;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.widget.Toast; // TYLER_TODO
+import android.widget.Toast;
 
 /**
  * Created by Tyler on 15/1/1.
  */
 public class BaseActivity extends ActionBarActivity{
-	public static Toast showToast(Context context, String text, int duration) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    public static Toast showToast(Context context, String text, int duration) {
 		// This function is used for debug log display.
 		Toast.makeText(context, text, duration).show();
 		return null;

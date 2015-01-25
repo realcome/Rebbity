@@ -1,4 +1,4 @@
-package com.rebbity.widget;
+package com.rebbity.widget.rainbow;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
