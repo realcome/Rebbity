@@ -42,10 +42,9 @@ public class MainActivity extends BaseActivity {
         hideTitle();
         invalidateToolbar();
 
-
-        List<Map<String, Object>> contents = new ArrayList<>();
+        List<Map<String, Object>> contents = new ArrayList<Map<String, Object>>();
         for (int i = 1; i <= 30; i++) {
-            Map<String, Object> map = new HashMap<>();
+            Map<String, Object> map = new HashMap<String, Object>();
             if (i % 2 == 0) {
                 map.put("ICON", R.drawable.jpeg6);
                 map.put("TITLE", i + "  Test Title one");
@@ -88,5 +87,12 @@ public class MainActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        invalidateToolbar();
     }
 }

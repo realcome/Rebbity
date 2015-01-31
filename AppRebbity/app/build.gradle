@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.3'
     compile files('src/main/java/com/rebbity/flyme-api.jar')
     compile files('src/main/java/com/rebbity/flyme-blur.jar')
+    compile files('src/main/java/com/rebbity/systembartint-1.0.4.jar')
 }
