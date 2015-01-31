@@ -13,6 +13,9 @@
     <color name="gray_dark">#ff818486</color>
     <color name="milk">#fff8f6e9</color>
 
+    <color name="windowbg">#fff8f6e9</color>
+    <color name="toolbar_split_default">#88F56313</color>
+
     <item name="rainbow_red" type="color">@color/red_light</item>
     <item name="rainbow_green" type="color">@color/green_light</item>
     <item name="rainbow_blue" type="color">@color/skyblue_light</item>

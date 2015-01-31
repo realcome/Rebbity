@@ -40,8 +40,11 @@
             android:name=".SplashActivity"
             android:theme="@style/AppFullScreen" >
         </activity>
+        <activity android:name=".SettingsActivity" >
+        </activity>
         <activity
-            android:name=".SettingsActivity" >
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
         </activity>
     </application>
 

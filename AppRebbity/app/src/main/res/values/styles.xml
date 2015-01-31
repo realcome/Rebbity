@@ -18,7 +18,10 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@drawable/milkbg</item>
+        <item name="android:windowBackground">@drawable/windowbg</item>
+
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
         <!-- <item name="android:windowAnimationStyle">@style/WindowAnimStyle</item> -->
     </style>
 
