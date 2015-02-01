@@ -47,26 +47,30 @@ import android.widget.Toast;
  */
 public class BaseActivity extends Activity{
     public static final int TOOLBAR_SPLIT_HEIGHT = 3;
-    private int m_toolbar_bg_color;
-    private int m_toolbar_split_color;
+    private int m_toolbar_bg_color = toolbar_bg_color();
+    private int m_toolbar_split_color = toolbar_spliter_color();
     private int m_toolbar_height;
 
     @Override
     public void setContentView(int layoutResID)
     {
-        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-
         if (isFlyme()) {
+            requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
             getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
         }
 
         super.setContentView(layoutResID);
-        int bgcolor = getResources().getColor(R.color.windowbg);
-        this.m_toolbar_bg_color = Color.argb(0x88, Color.red(bgcolor), Color.green(bgcolor), Color.blue(bgcolor));
-        this.m_toolbar_split_color = getResources().getColor(R.color.toolbar_split_default);
-        this.m_toolbar_height = 0;
         ActionBarUtils.setDarkStatusIconForFlyme(this, true);
         invalidateToolbar();
+    }
+
+    private static int toolbar_bg_color() {
+        int bgcolor = RebbityApp.getG_context().getResources().getColor(R.color.windowbg);
+        return Color.argb(0x88, Color.red(bgcolor), Color.green(bgcolor), Color.blue(bgcolor));
+    }
+
+    private static int toolbar_spliter_color() {
+        return RebbityApp.getG_context().getResources().getColor(R.color.toolbar_split_default);
     }
 
     public void setSplitColor(int color, boolean immediately)
