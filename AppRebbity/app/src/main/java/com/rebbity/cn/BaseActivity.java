@@ -19,9 +19,7 @@
 package com.rebbity.cn;
 
 import com.meizu.flyme.blur.drawable.BlurDrawable;
-import com.meizu.flyme.reflect.ActionBarProxy;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.rebbity.common.utils.ActionBarUtils;
 import com.rebbity.common.utils.WindowUtils;
 import com.rebbity.config.APP_PREF;
 
@@ -39,7 +37,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ListView;
 import android.widget.Toast;
 
 /**
@@ -49,18 +46,18 @@ public class BaseActivity extends Activity{
     public static final int TOOLBAR_SPLIT_HEIGHT = 3;
     private int m_toolbar_bg_color = toolbar_bg_color();
     private int m_toolbar_split_color = toolbar_spliter_color();
-    private int m_toolbar_height;
 
     @Override
     public void setContentView(int layoutResID)
     {
+        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+
         if (isFlyme()) {
-            requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
             getWindow().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
         }
 
         super.setContentView(layoutResID);
-        ActionBarUtils.setDarkStatusIconForFlyme(this, true);
+        WindowUtils.setDarkStatusIconForFlyme(this, true);
         invalidateToolbar();
     }
 
@@ -107,51 +104,96 @@ public class BaseActivity extends Activity{
             return;
         }
 
-        ActionBar localActionBar = getActionBar();
-        int bar_height = 0;
-
-        if (localActionBar != null)
-            bar_height = ActionBarProxy.getActionBarHeight(this, localActionBar);
-
-        bar_height = Math.max(m_toolbar_height, bar_height);
-        showToast(this, "" + bar_height + " " + ActionBarUtils.getStatusBarHeight(this), Toast.LENGTH_LONG);
-
-
-        BlurDrawable bgdrawable = new BlurDrawable();
-        bgdrawable.setColorFilter(m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
-        Drawable[] arrayOfDrawable = new Drawable[2];
-        arrayOfDrawable[0] = bgdrawable;
-        arrayOfDrawable[1] = new ColorDrawable(m_toolbar_split_color);
-
+        ActionBar actionBar = getActionBar();
         ViewGroup rootlayout = (ViewGroup) findViewById(R.id.root_layout);
 
-        int bgViewHeight = bar_height + ActionBarUtils.getStatusBarHeight(this);
-        if (rootlayout != null) {
-            localActionBar.setBackgroundDrawable(new ColorDrawable(0x00000000));
-            transStatusBarAndNaviBar();
+        int toolbar_height = WindowUtils.getActionBarSize(this);
+        int statusbar_height = WindowUtils.getStatusBarHeight(this);
+        int navibar_height = WindowUtils.getNavigationBarHeight(this);
 
+        if (isSupportTransStatusBar()) {
+            if (isFlyme() && rootlayout != null) {
+                //透明状态栏
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                //透明导航栏
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                actionBar.setBackgroundDrawable(new ColorDrawable(0x00000000));
 
-            LayerDrawable localLayerDrawable = new LayerDrawable(arrayOfDrawable);
-            localLayerDrawable.setLayerInset(0, 0, 0, 0, TOOLBAR_SPLIT_HEIGHT);
-            localLayerDrawable.setLayerInset(1, 0, bgViewHeight - TOOLBAR_SPLIT_HEIGHT, 0, 0);
-            View view = new View(this);
+                BlurDrawable bgdrawable = new BlurDrawable();
+                bgdrawable.setColorFilter(m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
+                Drawable[] arrayOfDrawable = new Drawable[2];
+                arrayOfDrawable[0] = bgdrawable;
+                arrayOfDrawable[1] = new ColorDrawable(m_toolbar_split_color);
 
-            view.setBackground(localLayerDrawable);
-            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, bgViewHeight));
-            rootlayout.addView(view);
-        } else {
-            if (!isFlyme()) {
-                transStatusBarAndNaviBar();
+                LayerDrawable localLayerDrawable = new LayerDrawable(arrayOfDrawable);
+                localLayerDrawable.setLayerInset(1, 0, statusbar_height + toolbar_height - TOOLBAR_SPLIT_HEIGHT, 0, 0);
+                View view = new View(this);
+
+                view.setBackground(localLayerDrawable);
+                view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusbar_height + toolbar_height));
+                rootlayout.addView(view);
+            } else if (isFlyme() && rootlayout == null) {
+                //透明导航栏
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+                BlurDrawable bgdrawable = new BlurDrawable();
+                bgdrawable.setColorFilter(m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
+                Drawable[] arrayOfDrawable = new Drawable[2];
+                arrayOfDrawable[0] = bgdrawable;
+                arrayOfDrawable[1] = new ColorDrawable(m_toolbar_split_color);
+
+                LayerDrawable localLayerDrawable = new LayerDrawable(arrayOfDrawable);
+                localLayerDrawable.setLayerInset(1, 0, toolbar_height - TOOLBAR_SPLIT_HEIGHT, 0, 0);
+
+                actionBar.setBackgroundDrawable(localLayerDrawable);
+            } else {
+                //透明状态栏
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                //透明导航栏
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+                BlurDrawable bgdrawable = new BlurDrawable();
+                bgdrawable.setColorFilter(m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
+                Drawable[] arrayOfDrawable = new Drawable[2];
+                arrayOfDrawable[0] = bgdrawable;
+                arrayOfDrawable[1] = new ColorDrawable(m_toolbar_split_color);
+
+                LayerDrawable localLayerDrawable = new LayerDrawable(arrayOfDrawable);
+                localLayerDrawable.setLayerInset(1, 0, toolbar_height - TOOLBAR_SPLIT_HEIGHT, 0, 0);
+
+                actionBar.setBackgroundDrawable(localLayerDrawable);
+                // create our manager instance after the content view is set
+                SystemBarTintManager tintManager = new SystemBarTintManager(this);
+                BlurDrawable statusdDl = new BlurDrawable();
+                statusdDl.setColorFilter(this.m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
+                tintManager.setStatusBarTintEnabled(true);
+                tintManager.setStatusBarTintDrawable(statusdDl);
+
+                // enable navigation bar tint
+                tintManager.setNavigationBarTintEnabled(true);
+                BlurDrawable naviDl = new BlurDrawable();
+                naviDl.setColorFilter(this.m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
+                tintManager.setNavigationBarTintDrawable(naviDl);
             }
+        } else {
+
+            BlurDrawable bgdrawable = new BlurDrawable();
+            bgdrawable.setColorFilter(m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
+            Drawable[] arrayOfDrawable = new Drawable[2];
+            arrayOfDrawable[0] = bgdrawable;
+            arrayOfDrawable[1] = new ColorDrawable(m_toolbar_split_color);
 
             LayerDrawable localLayerDrawable = new LayerDrawable(arrayOfDrawable);
-            localLayerDrawable.setLayerInset(0, 0, 0, 0, TOOLBAR_SPLIT_HEIGHT);
-            localLayerDrawable.setLayerInset(1, 0, bar_height - TOOLBAR_SPLIT_HEIGHT, 0, 0);
-            localActionBar.setBackgroundDrawable(localLayerDrawable);
+            localLayerDrawable.setLayerInset(1, 0, statusbar_height + toolbar_height - TOOLBAR_SPLIT_HEIGHT, 0, 0);
+
+            actionBar.setBackgroundDrawable(localLayerDrawable);
         }
 
-        localActionBar.setSplitBackgroundDrawable(bgdrawable);
 
+
+        BlurDrawable sliptbg = new BlurDrawable();
+        sliptbg.setColorFilter(m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
+        actionBar.setSplitBackgroundDrawable(sliptbg);
     }
 
     public static Toast showToast(Context context, String text, int duration) {
@@ -194,33 +236,7 @@ public class BaseActivity extends Activity{
         return false;
     }
 
-    private void transStatusBarAndNaviBar() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
-
-        // create our manager instance after the content view is set
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        // enable navigation bar tint
-        tintManager.setNavigationBarTintEnabled(true);
-        BlurDrawable naviDl = new BlurDrawable();
-        naviDl.setColorFilter(this.m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
-        tintManager.setNavigationBarTintDrawable(naviDl);
-    }
-
     public static boolean isFlyme() {
         return RebbityApp.isFlyme();
-    }
-
-    public static int getActionBarHeight(Activity ac) {
-        ActionBar localActionBar = ac.getActionBar();
-        int bar_height = 0;
-
-        if (localActionBar != null)
-            bar_height = ActionBarProxy.getActionBarHeight(ac, localActionBar);
-        return bar_height;
     }
 }

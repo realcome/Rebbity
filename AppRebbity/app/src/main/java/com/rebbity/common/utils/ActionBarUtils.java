@@ -52,29 +52,7 @@ public class ActionBarUtils {
         }
     }
 
-    public static void setDarkStatusIconForFlyme(Activity activity, boolean isDark) {
-        try {
-            Window window = activity.getWindow();
-            WindowManager.LayoutParams layoutParams = window.getAttributes();
-            Field localField1 = layoutParams.getClass().getDeclaredField("meizuFlags");
-            Field localField2 = WindowManager.LayoutParams.class.getDeclaredField("MEIZU_FLAG_DARK_STATUS_BAR_ICON");
-            localField1.setAccessible(true);
-            localField2.setAccessible(true);
-            int mask = localField2.getInt(null);
-            int value = localField1.getInt(layoutParams);
 
-            int dstVal = value & (mask ^ 0xFFFFFFFF);
-
-            if (isDark) {
-                dstVal = value | mask;
-            }
-
-            localField1.setInt(layoutParams, dstVal);
-            window.setAttributes(layoutParams);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void setFullWindow(Activity activity, boolean isfullwindow) {
         try {

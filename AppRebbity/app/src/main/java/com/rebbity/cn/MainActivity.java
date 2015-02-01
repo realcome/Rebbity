@@ -18,20 +18,13 @@
 
 package com.rebbity.cn;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
-
-import com.meizu.flyme.blur.drawable.BlurDrawable;
-import com.meizu.flyme.reflect.ActionBarProxy;
-import com.rebbity.common.utils.ActionBarUtils;
 import com.rebbity.common.utils.WindowUtils;
 
 import java.util.ArrayList;
@@ -47,7 +40,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        ActionBarUtils.setDarkStatusIconForFlyme(this, true);
+        WindowUtils.setDarkStatusIconForFlyme(this, true);
         setToolbarLogo(R.drawable.toolbar_logo);
         hideTitle();
 
