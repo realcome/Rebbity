@@ -21,6 +21,8 @@ package com.rebbity.cn;
 import com.meizu.flyme.blur.drawable.BlurDrawable;
 import com.meizu.flyme.reflect.ActionBarProxy;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.rebbity.common.utils.ActionBarUtils;
+import com.rebbity.common.utils.WindowUtils;
 import com.rebbity.config.APP_PREF;
 
 import android.app.ActionBar;
@@ -33,6 +35,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -42,13 +46,9 @@ import android.widget.Toast;
  */
 public class BaseActivity extends Activity{
     public static final int TOOLBAR_SPLIT_HEIGHT = 3;
-    public static final int TOOLBAR_BG_ALPHA = 0xdd;
-
-    private BlurDrawable m_toolbar_bg_drawable;
-    private Drawable m_toolbar_split_drawable;
-
     private int m_toolbar_bg_color;
     private int m_toolbar_split_color;
+    private int m_toolbar_height;
 
     @Override
     public void setContentView(int layoutResID)
@@ -63,6 +63,10 @@ public class BaseActivity extends Activity{
         int bgcolor = getResources().getColor(R.color.windowbg);
         this.m_toolbar_bg_color = Color.argb(0x88, Color.red(bgcolor), Color.green(bgcolor), Color.blue(bgcolor));
         this.m_toolbar_split_color = getResources().getColor(R.color.toolbar_split_default);
+        this.m_toolbar_height = 0;
+
+        ActionBarUtils.setDarkStatusIconForFlyme(this, true);
+        invalidateToolbar();
     }
 
     public void setSplitColor(int color, boolean immediately)
@@ -95,32 +99,50 @@ public class BaseActivity extends Activity{
 
     public void invalidateToolbar()
     {
-        if (this.m_toolbar_bg_drawable == null) {
-            BlurDrawable localBlurDrawable = new BlurDrawable();
-            this.m_toolbar_bg_drawable = localBlurDrawable;
+        if (getActionBar() == null) {
+            return;
         }
 
-        if (this.m_toolbar_split_drawable == null) {
-            ColorDrawable localColorDrawable = new ColorDrawable(m_toolbar_split_color);
-            this.m_toolbar_split_drawable = localColorDrawable;
-        }
-
-        this.m_toolbar_bg_drawable.setColorFilter(this.m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
         ActionBar localActionBar = getActionBar();
         int bar_height = 0;
 
         if (localActionBar != null)
             bar_height = ActionBarProxy.getActionBarHeight(this, localActionBar);
 
+        bar_height = Math.max(m_toolbar_height, bar_height);
         showToast(this, ""+bar_height+" "+getResources().getDisplayMetrics().density, Toast.LENGTH_LONG);
+
+
+        BlurDrawable bgdrawable = new BlurDrawable();
+        bgdrawable.setColorFilter(m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
         Drawable[] arrayOfDrawable = new Drawable[2];
-        arrayOfDrawable[0] = this.m_toolbar_bg_drawable;
-        arrayOfDrawable[1] = this.m_toolbar_split_drawable;
-        LayerDrawable localLayerDrawable = new LayerDrawable(arrayOfDrawable);
-        localLayerDrawable.setLayerInset(0, 0, 0, 0, TOOLBAR_SPLIT_HEIGHT);
-        localLayerDrawable.setLayerInset(1, 0, bar_height - TOOLBAR_SPLIT_HEIGHT, 0, 0);
-        localActionBar.setSplitBackgroundDrawable(this.m_toolbar_bg_drawable);
-        localActionBar.setBackgroundDrawable(localLayerDrawable);
+        arrayOfDrawable[0] = bgdrawable;
+        arrayOfDrawable[1] = new ColorDrawable(m_toolbar_split_color);
+
+        ViewGroup rootlayout = (ViewGroup) findViewById(R.id.root_layout);
+        if (rootlayout != null) {
+            int bgViewHeight = bar_height + ActionBarUtils.getStatusBarHeight(this);
+            localActionBar.setBackgroundDrawable(new ColorDrawable(0x00000000));
+            transStatusBarAndNaviBar();
+
+
+            LayerDrawable localLayerDrawable = new LayerDrawable(arrayOfDrawable);
+            localLayerDrawable.setLayerInset(0, 0, 0, 0, TOOLBAR_SPLIT_HEIGHT);
+            localLayerDrawable.setLayerInset(1, 0, bgViewHeight - TOOLBAR_SPLIT_HEIGHT, 0, 0);
+            View view = new View(this);
+
+            view.setBackground(localLayerDrawable);
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, bgViewHeight));
+            rootlayout.addView(view);
+        } else {
+            LayerDrawable localLayerDrawable = new LayerDrawable(arrayOfDrawable);
+            localLayerDrawable.setLayerInset(0, 0, 0, 0, TOOLBAR_SPLIT_HEIGHT);
+            localLayerDrawable.setLayerInset(1, 0, bar_height - TOOLBAR_SPLIT_HEIGHT, 0, 0);
+            localActionBar.setBackgroundDrawable(localLayerDrawable);
+        }
+
+        localActionBar.setSplitBackgroundDrawable(bgdrawable);
+
     }
 
     public static Toast showToast(Context context, String text, int duration) {
@@ -163,7 +185,7 @@ public class BaseActivity extends Activity{
         return false;
     }
 
-    private void changeStatusBarAndNaviBar() {
+    private void transStatusBarAndNaviBar() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -173,15 +195,23 @@ public class BaseActivity extends Activity{
 
         // create our manager instance after the content view is set
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        // enable status bar tint
-        tintManager.setStatusBarTintEnabled(true);
         // enable navigation bar tint
         tintManager.setNavigationBarTintEnabled(true);
-
-        tintManager.setTintColor(m_toolbar_bg_color);
+        BlurDrawable naviDl = new BlurDrawable();
+        naviDl.setColorFilter(this.m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
+        tintManager.setNavigationBarTintDrawable(naviDl);
     }
 
-    public boolean isFlyme() {
+    public static boolean isFlyme() {
         return RebbityApp.isFlyme();
+    }
+
+    public static int getActionBarHeight(Activity ac) {
+        ActionBar localActionBar = ac.getActionBar();
+        int bar_height = 0;
+
+        if (localActionBar != null)
+            bar_height = ActionBarProxy.getActionBarHeight(ac, localActionBar);
+        return bar_height;
     }
 }

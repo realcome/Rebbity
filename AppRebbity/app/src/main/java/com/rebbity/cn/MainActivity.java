@@ -22,8 +22,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.meizu.flyme.blur.drawable.BlurDrawable;
+import com.meizu.flyme.reflect.ActionBarProxy;
+import com.rebbity.common.utils.ActionBarUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,11 +41,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        setContentView(R.layout.activity_main);
+        ActionBarUtils.setDarkStatusIconForFlyme(this, true);
         setToolbarLogo(R.drawable.toolbar_logo);
         hideTitle();
-        invalidateToolbar();
 
         List<Map<String, Object>> contents = new ArrayList<Map<String, Object>>();
         for (int i = 1; i <= 30; i++) {
@@ -63,6 +68,7 @@ public class MainActivity extends BaseActivity {
                 android.R.id.text2 });
 
         ListView v = (ListView) findViewById(R.id.list);
+//        v.setPadding(v.getPaddingLeft(), v.getPaddingTop() + getActionBarHeight(this), v.getPaddingRight(), v.getBottom());
         v.setAdapter(adapter);
     }
 
@@ -92,7 +98,5 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        invalidateToolbar();
     }
 }
