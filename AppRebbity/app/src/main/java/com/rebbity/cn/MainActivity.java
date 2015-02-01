@@ -23,12 +23,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.meizu.flyme.blur.drawable.BlurDrawable;
 import com.meizu.flyme.reflect.ActionBarProxy;
 import com.rebbity.common.utils.ActionBarUtils;
+import com.rebbity.common.utils.WindowUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,6 +74,19 @@ public class MainActivity extends BaseActivity {
         ListView v = (ListView) findViewById(R.id.list);
 //        v.setPadding(v.getPaddingLeft(), v.getPaddingTop() + getActionBarHeight(this), v.getPaddingRight(), v.getBottom());
         v.setAdapter(adapter);
+
+
+        View headerView = new View(MainActivity.this);
+        AbsListView.LayoutParams params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, 100);
+
+        headerView.setLayoutParams(params);
+        headerView.setBackgroundColor(0xff000000);
+        v.addHeaderView(headerView);
+        params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, WindowUtils.getNavigationBarHeight(this));
+        View footerView = new View(this);
+        footerView.setLayoutParams(params);
+        footerView.setBackgroundColor(0x00000000);
+        v.addFooterView(footerView);
     }
 
 

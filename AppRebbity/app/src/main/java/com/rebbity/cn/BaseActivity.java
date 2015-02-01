@@ -39,6 +39,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ListView;
 import android.widget.Toast;
 
 /**
@@ -64,7 +65,6 @@ public class BaseActivity extends Activity{
         this.m_toolbar_bg_color = Color.argb(0x88, Color.red(bgcolor), Color.green(bgcolor), Color.blue(bgcolor));
         this.m_toolbar_split_color = getResources().getColor(R.color.toolbar_split_default);
         this.m_toolbar_height = 0;
-
         ActionBarUtils.setDarkStatusIconForFlyme(this, true);
         invalidateToolbar();
     }
@@ -110,7 +110,7 @@ public class BaseActivity extends Activity{
             bar_height = ActionBarProxy.getActionBarHeight(this, localActionBar);
 
         bar_height = Math.max(m_toolbar_height, bar_height);
-        showToast(this, ""+bar_height+" "+getResources().getDisplayMetrics().density, Toast.LENGTH_LONG);
+        showToast(this, "" + bar_height + " " + ActionBarUtils.getStatusBarHeight(this), Toast.LENGTH_LONG);
 
 
         BlurDrawable bgdrawable = new BlurDrawable();
@@ -120,8 +120,9 @@ public class BaseActivity extends Activity{
         arrayOfDrawable[1] = new ColorDrawable(m_toolbar_split_color);
 
         ViewGroup rootlayout = (ViewGroup) findViewById(R.id.root_layout);
+
+        int bgViewHeight = bar_height + ActionBarUtils.getStatusBarHeight(this);
         if (rootlayout != null) {
-            int bgViewHeight = bar_height + ActionBarUtils.getStatusBarHeight(this);
             localActionBar.setBackgroundDrawable(new ColorDrawable(0x00000000));
             transStatusBarAndNaviBar();
 
@@ -135,6 +136,10 @@ public class BaseActivity extends Activity{
             view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, bgViewHeight));
             rootlayout.addView(view);
         } else {
+            if (!isFlyme()) {
+                transStatusBarAndNaviBar();
+            }
+
             LayerDrawable localLayerDrawable = new LayerDrawable(arrayOfDrawable);
             localLayerDrawable.setLayerInset(0, 0, 0, 0, TOOLBAR_SPLIT_HEIGHT);
             localLayerDrawable.setLayerInset(1, 0, bar_height - TOOLBAR_SPLIT_HEIGHT, 0, 0);

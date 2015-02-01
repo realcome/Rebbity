@@ -18,6 +18,8 @@
 
 package com.rebbity.common.utils;
 
+import android.app.Activity;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -30,5 +32,12 @@ public class WindowUtils {
         ViewGroup rootView = (ViewGroup) window.getDecorView();
 
         rootView.addView(view);
+    }
+
+    public static int getNavigationBarHeight(Activity activity) {
+        Resources resources = activity.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height","dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        return height;
     }
 }
