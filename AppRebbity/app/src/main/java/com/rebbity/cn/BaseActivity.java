@@ -189,8 +189,6 @@ public class BaseActivity extends Activity{
             actionBar.setBackgroundDrawable(localLayerDrawable);
         }
 
-
-
         BlurDrawable sliptbg = new BlurDrawable();
         sliptbg.setColorFilter(m_toolbar_bg_color, PorterDuff.Mode.SRC_OVER);
         actionBar.setSplitBackgroundDrawable(sliptbg);
