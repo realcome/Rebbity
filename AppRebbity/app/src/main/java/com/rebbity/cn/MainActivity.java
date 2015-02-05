@@ -22,10 +22,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
 import com.rebbity.common.utils.WindowUtils;
+import com.rebbity.widget.ColorPicker.ColorPicker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,17 +71,10 @@ public class MainActivity extends BaseActivity {
         v.setAdapter(adapter);
 
 
-        View headerView = new View(MainActivity.this);
-        AbsListView.LayoutParams params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, 100);
+        int appendPaddingTop = WindowUtils.getActionBarSize(this) + WindowUtils.getStatusBarHeight(this);
+        int appendPaddingBottom = WindowUtils.getNavigationBarHeight(this);
 
-        headerView.setLayoutParams(params);
-        headerView.setBackgroundColor(0xff000000);
-        v.addHeaderView(headerView);
-        params = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, WindowUtils.getNavigationBarHeight(this));
-        View footerView = new View(this);
-        footerView.setLayoutParams(params);
-        footerView.setBackgroundColor(0x00000000);
-        v.addFooterView(footerView);
+        v.setPadding(v.getPaddingLeft(), v.getPaddingTop() + appendPaddingTop, v.getPaddingRight(), v.getPaddingBottom() + appendPaddingBottom);
     }
 
 
@@ -99,6 +94,8 @@ public class MainActivity extends BaseActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            ColorPicker colorPicker = new ColorPicker();
+            colorPicker.show(getFragmentManager(), "colorpicker");
             return true;
         }
 
@@ -108,5 +105,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    public void pickedColor(View view) {
+        showToast(this, "OOOOOO", Toast.LENGTH_LONG);
     }
 }

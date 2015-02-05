@@ -34,11 +34,10 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <!-- 
-    <style name="WindowAnimStyle" parent="@android:style/Animation.Translucent">
-    	<item name="android:windowEnterAnimation"></item>
-    	<item name="android:windowExitAnimation"></item>
-    </style>
-     -->
 
+    <style name="colorpicker_item">
+        <item name="android:layout_width">60.0dip</item>
+        <item name="android:layout_height">60.0dip</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
 </resources>

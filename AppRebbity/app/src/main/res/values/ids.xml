@@ -21,4 +21,26 @@
     <item type="id" name="actionbar_padding_view"></item>
     <item type="id" name="list"></item>
     <item type="id" name="root_layout"></item>
+
+
+    <item type="id" name="color_btn1">false</item>
+    <item type="id" name="color_btn2">false</item>
+    <item type="id" name="color_btn3">false</item>
+    <item type="id" name="color_btn4">false</item>
+    <item type="id" name="color_btn5">false</item>
+    <item type="id" name="color_btn6">false</item>
+    <item type="id" name="color_btn7">false</item>
+    <item type="id" name="color_btn8">false</item>
+    <item type="id" name="color_btn9">false</item>
+    <item type="id" name="color_btn10">false</item>
+    <item type="id" name="color_btn11">false</item>
+    <item type="id" name="color_btn12">false</item>
+    <item type="id" name="color_btn13">false</item>
+    <item type="id" name="color_btn14">false</item>
+    <item type="id" name="color_btn15">false</item>
+    <item type="id" name="color_btn16">false</item>
+    <item type="id" name="color_btn17">false</item>
+    <item type="id" name="color_btn18">false</item>
+    <item type="id" name="color_btn19">false</item>
+    <item type="id" name="color_btn20">false</item>
 </resources>
