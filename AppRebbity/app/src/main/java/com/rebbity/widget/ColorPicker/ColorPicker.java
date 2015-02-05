@@ -76,7 +76,7 @@ public class ColorPicker extends DialogFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.color_picker, container, false);
-        
+
         ColorPickClickListener clickListener = new ColorPickClickListener(this);
 
         CircleButton localCircleButton1 = (CircleButton)view.findViewById(R.id.color_btn1);
@@ -139,7 +139,7 @@ public class ColorPicker extends DialogFragment{
             @SuppressLint("ClickableViewAccessibility")
             public boolean onTouch(View v, MotionEvent event) {
                 dismiss();
-                startExitAnimation();
+                mRoot.removeView(mBgView);
                 return true;
             }
         });
@@ -151,33 +151,17 @@ public class ColorPicker extends DialogFragment{
         }
 
         dismiss();
-        startExitAnimation();
-    }
-
-    private void startExitAnimation() {
-        AnimationUtils.animateAlpha(mBgView, 1f, 0f, ANIMATION_DURING, new Runnable() {
-            @Override
-            public void run() {
-                mRoot.removeView(mBgView);
-                startExitAnimation();
-            }
-        });
-    }
-
-    private void startEnterAnimation() {
-        AnimationUtils.animateAlpha(mBgView, 0f, 1f, ANIMATION_DURING, null);
+        mRoot.removeView(mBgView);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        startEnterAnimation();
     }
 
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
-        startExitAnimation();
     }
 
     class ColorPickClickListener implements View.OnClickListener {
