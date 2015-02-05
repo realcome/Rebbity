@@ -40,4 +40,10 @@
         <item name="android:layout_height">60.0dip</item>
         <item name="android:layout_centerInParent">true</item>
     </style>
+
+    <style name="dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

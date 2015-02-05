@@ -20,24 +20,23 @@ package com.rebbity.widget.ColorPicker;
 
 import android.annotation.SuppressLint;
 import android.app.DialogFragment;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ScrollView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.meizu.flyme.blur.drawable.BlurDrawable;
 import com.rebbity.cn.R;
-import com.rebbity.common.utils.AnimationUtils;
 import com.rebbity.widget.CircleButton;
 
 /**
@@ -45,15 +44,13 @@ import com.rebbity.widget.CircleButton;
  */
 public class ColorPicker extends DialogFragment{
 
-    private final static int ANIMATION_DURING = 1000;
+    private int mBgColor = 0xfff8f6e9;
 
-    private ViewGroup mRoot;
+    public EditText mCustomColor;
 
-    private View mBgView;
+    private Button mUseButton;
 
-    private int mBgColor = 0x88f8f6e9;
-
-    private IColorPickListener mColorPickListener;
+    private ColorPickListener mColorPickListener;
 
     public int getBgColor() {
         return mBgColor;
@@ -63,21 +60,31 @@ public class ColorPicker extends DialogFragment{
         this.mBgColor = mBgColor;
     }
 
-    public void addColorPickedListener(IColorPickListener listener) {
+    public void addColorPickedListener(ColorPickListener listener) {
         mColorPickListener = listener;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Holo_Light_NoActionBar_TranslucentDecor);
+        setStyle(DialogFragment.STYLE_NO_TITLE, 0);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.color_picker, container, false);
 
-        ColorPickClickListener clickListener = new ColorPickClickListener(this);
+        mCustomColor = (EditText) view.findViewById(R.id.color_custom_edit);
+        CustomTextWatcher watcher = new CustomTextWatcher(this);
+        mCustomColor.addTextChangedListener(watcher);
+
+
+        ButtonClickListener clickListener = new ButtonClickListener(this);
+        mUseButton = (Button) view.findViewById(R.id.color_custom_use);
+        mUseButton.setOnClickListener(clickListener);
+
+        Window window = getDialog().getWindow();
+        window.setBackgroundDrawable(new ColorDrawable(mBgColor));
 
         CircleButton localCircleButton1 = (CircleButton)view.findViewById(R.id.color_btn1);
         CircleButton localCircleButton2 = (CircleButton)view.findViewById(R.id.color_btn2);
@@ -124,22 +131,11 @@ public class ColorPicker extends DialogFragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Window window = getDialog().getWindow();
-        BlurDrawable winbg = new BlurDrawable();
-        winbg.setColorFilter(mBgColor, PorterDuff.Mode.SRC_OVER);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        mBgView = new View(getActivity());
-        mBgView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mBgView.setBackground(winbg);
-        mRoot = (ViewGroup) getActivity().getWindow().getDecorView();
-        mRoot.addView(mBgView);
-
         view.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             public boolean onTouch(View v, MotionEvent event) {
                 dismiss();
-                mRoot.removeView(mBgView);
+                //mRoot.removeView(mBgView);
                 return true;
             }
         });
@@ -151,7 +147,6 @@ public class ColorPicker extends DialogFragment{
         }
 
         dismiss();
-        mRoot.removeView(mBgView);
     }
 
     @Override
@@ -164,31 +159,119 @@ public class ColorPicker extends DialogFragment{
         super.onCancel(dialog);
     }
 
-    class ColorPickClickListener implements View.OnClickListener {
+    public void notifyCustomColor(int color, boolean isOk) {
+        if (isOk) {
+            if (mUseButton != null) {
+                mUseButton.setBackgroundColor(color);
+                mUseButton.setEnabled(true);
+            }
+        } else {
+            if (mUseButton != null) {
+                mUseButton.setBackgroundColor(0);
+                mUseButton.setEnabled(false);
+            }
+        }
+    }
+
+    class ButtonClickListener implements View.OnClickListener {
         private ColorPicker picker_;
-        public ColorPickClickListener(ColorPicker picker) {
+        public ButtonClickListener(ColorPicker picker) {
             picker_ = picker;
         }
 
         @Override
         public void onClick(View v) {
+            int viewID = v.getId();
+            int color = 0xffffffff;
+            boolean isOk = true;
+
+            switch (viewID) {
+                case R.id.color_custom_use:
+                    if (picker_ == null) {
+                        break;
+                    }
+
+                    String str = picker_.mCustomColor.getText().toString();
+
+                    try {
+                        if (str.length() == 3)
+                        {
+                            String str1 = str.substring(0, 1);
+                            String str2 = str.substring(1, 2);
+                            String str3 = str.substring(2, 3);
+                            str = str1 + str1 + str2 + str2 + str3 + str3;
+                        }
+                        color = Color.parseColor("#" + str);
+                    } catch (Exception e) {
+                        Log.e("ColorPicker", "Convert color error.");
+                        isOk = false;
+                    }
+
+                    picker_.notifyPickedColor(color, isOk);
+                    break;
+                default:
+                    if (picker_ == null) {
+                        break;
+                    }
+
+                    if (v.getTag().toString().contains("#"))
+                    {
+                        try {
+                            color = Color.parseColor(v.getTag().toString());
+                        } catch (Exception e) {
+                            Log.e("ColorPicker", "Convert color error.");
+                            isOk = false;
+                        }
+
+                        picker_.notifyPickedColor(color, isOk);
+                    }
+                    break;
+            }
+        }
+    }
+
+    class CustomTextWatcher implements TextWatcher {
+        ColorPicker picker_;
+
+        public CustomTextWatcher(ColorPicker picker) {
+            picker_ = picker;
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
             if (picker_ == null) {
                 return;
             }
 
-            if (v.getTag().toString().contains("#"))
-            {
-                int color = 0xffffffff;
-                boolean isOk = true;
-                try {
-                    color = Color.parseColor(v.getTag().toString());
-                } catch (Exception e) {
-                    Log.e("ColorPicker", "Convert color error.");
-                    isOk = false;
-                }
+            int color = 0xffffffff;
+            boolean isOk = true;
+            String str = s.toString();
 
-                picker_.notifyPickedColor(color, isOk);
+            try {
+                if (str.length() == 3)
+                {
+                    String str1 = str.substring(0, 1);
+                    String str2 = str.substring(1, 2);
+                    String str3 = str.substring(2, 3);
+                    str = str1 + str1 + str2 + str2 + str3 + str3;
+                }
+                color = Color.parseColor("#" + str);
+            } catch (Exception e) {
+                Log.e("ColorPicker", "Convert color error.");
+                isOk = false;
             }
+
+            picker_.notifyCustomColor(color, isOk);
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
         }
     }
 }

@@ -21,6 +21,6 @@ package com.rebbity.widget.ColorPicker;
 /**
  * Created by Tyler on 15/2/5.
  */
-public abstract interface IColorPickListener  {
-    public abstract void notifyColorPicked(int color, boolean isOk);
+public interface ColorPickListener {
+    public void notifyColorPicked(int color, boolean isOk);
 }

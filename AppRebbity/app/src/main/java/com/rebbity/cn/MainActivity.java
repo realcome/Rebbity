@@ -18,6 +18,7 @@
 
 package com.rebbity.cn;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.rebbity.common.utils.WindowUtils;
+import com.rebbity.widget.ColorPicker.ColorPickListener;
 import com.rebbity.widget.ColorPicker.ColorPicker;
 
 import java.util.ArrayList;
@@ -95,6 +97,13 @@ public class MainActivity extends BaseActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             ColorPicker colorPicker = new ColorPicker();
+            ColorPickListener listener = new ColorPickListener() {
+                @Override
+                public void notifyColorPicked(int color, boolean isOk) {
+                    Toast.makeText(MainActivity.this, ""+color, Toast.LENGTH_SHORT).show();
+                }
+            };
+            colorPicker.addColorPickedListener(listener);
             colorPicker.show(getFragmentManager(), "colorpicker");
             return true;
         }
