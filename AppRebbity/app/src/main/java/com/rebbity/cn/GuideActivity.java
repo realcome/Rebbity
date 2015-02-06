@@ -13,9 +13,7 @@ public class GuideActivity extends BaseActivity {
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
 			BaseActivity.changeStartState(GuideActivity.this);
-			//BaseActivity.showToast(GuideActivity.this, ""+rest, Toast.LENGTH_SHORT);
 		}
 		
 	};
@@ -30,8 +28,6 @@ public class GuideActivity extends BaseActivity {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
-
 		mHandler.removeCallbacks(mTaskChangeFirst);
 		super.onDestroy();
 	}

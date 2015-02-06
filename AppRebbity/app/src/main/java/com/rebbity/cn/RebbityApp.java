@@ -34,7 +34,6 @@ public class RebbityApp extends Application {
             Method method = Class.forName("android.os.SystemProperties").getMethod("get",String.class);
             device=(String) method.invoke(null, devicename);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

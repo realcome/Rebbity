@@ -76,8 +76,6 @@ public class ColorTag extends View{
 	public void setbRingColorFollow(boolean bRingColorFollow) {
 		this.bRingColorFollow = bRingColorFollow;
 	}
-
-	
 	
 	public ColorTag(Context context) {
 		super(context);
@@ -88,10 +86,7 @@ public class ColorTag extends View{
 		this.mContext = context;
 		this.mPaint = new Paint();
 		this.mPaint.setAntiAlias(true);
-		
-		// TODO Auto-generated constructor stub
 	}
-	
 
 	public ColorTag(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
@@ -102,7 +97,6 @@ public class ColorTag extends View{
 		this.mContext = context;
 		this.mPaint = new Paint();
 		this.mPaint.setAntiAlias(true);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ColorTag(Context context, AttributeSet attrs) {
@@ -114,7 +108,6 @@ public class ColorTag extends View{
 		this.mContext = context;
 		this.mPaint = new Paint();
 		this.mPaint.setAntiAlias(true);
-		// TODO Auto-generated constructor stub
 	}
 
 	public static int dipToPix(Context context, float dipVal){
@@ -175,11 +168,9 @@ public class ColorTag extends View{
 			return mRingColor;
 		}
 	}
-	
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		// TODO Auto-generated method stub
 		super.onDraw(canvas);
 
 		int cx = getWidth() / 2;
@@ -207,12 +198,5 @@ public class ColorTag extends View{
 		}
 		
 		canvas.drawCircle(cx, cy, getRingR(), mPaint);
- 
-		
-		
 	}
-	
-	
-	
-
 }

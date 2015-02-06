@@ -17,17 +17,14 @@ public class ShadowView extends View{
 
 	public ShadowView(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ShadowView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ShadowView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		// TODO Auto-generated constructor stub
 	}
 	
 	private int getRealWidth(int measureSpec){
@@ -75,7 +72,6 @@ public class ShadowView extends View{
 
 	@Override
 	protected void drawableStateChanged() {
-		// TODO Auto-generated method stub
 		super.drawableStateChanged();
 		if (this.mShadow != null)
 		      this.mShadow.setState(getDrawableState());
@@ -84,7 +80,6 @@ public class ShadowView extends View{
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		// TODO Auto-generated method stub
 		super.onDraw(canvas);
 
 		if(this.mShadow != null){
@@ -94,7 +89,6 @@ public class ShadowView extends View{
 
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-		// TODO Auto-generated method stub
 		super.onLayout(changed, left, top, right, bottom);
 		if(changed == true){
 			setBounds();
@@ -103,7 +97,6 @@ public class ShadowView extends View{
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		// TODO Auto-generated method stub
 		super.onMeasure(getRealWidth(widthMeasureSpec), getRealHeight(heightMeasureSpec));
 	}
 	
