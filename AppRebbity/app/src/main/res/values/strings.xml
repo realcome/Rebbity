@@ -54,5 +54,6 @@
     <string name="pref_title_version">Rebbity Alpha</string>
     <string name="pref_desc_thanks">Thank you for downloading. Enjoy!</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_reader">Reader</string>
 
 </resources>
