@@ -81,6 +81,7 @@ public class ColorPicker extends DialogFragment{
 
         ButtonClickListener clickListener = new ButtonClickListener(this);
         mUseButton = (Button) view.findViewById(R.id.color_custom_use);
+        mUseButton.setEnabled(false);
         mUseButton.setOnClickListener(clickListener);
 
         Window window = getDialog().getWindow();
