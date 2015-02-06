@@ -16,21 +16,27 @@
  * limitations under the License.
  */
 
-package com.rebbity;
+package com.rebbity.cn;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.rebbity.cn.R;
 
-public class Reader extends ActionBarActivity {
+public class ReaderActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reader);
+        Intent intent = getIntent();
+        int EssayId = intent.getIntExtra("essayid", 0);
+
+
+
+        // TODO
+        //setContentView(R.layout.activity_reader);
     }
 
 
