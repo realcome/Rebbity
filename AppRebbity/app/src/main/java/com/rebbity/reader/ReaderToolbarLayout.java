@@ -18,21 +18,30 @@
 
 package com.rebbity.reader;
 
-import android.app.Fragment;
-import android.os.Bundle;
-
-import com.rebbity.constants.INTENT_CONST;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.RelativeLayout;
 
 /**
- * Created by Tyler on 15/2/6.
+ * Created by Tyler on 15/2/7.
  */
-public class ReaderFragment extends Fragment {
-    public static ReaderFragment createInstance(int uniqueId) {
-        ReaderFragment readerFragment = new ReaderFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(INTENT_CONST.KEY_READER_UNIQUE_ID, uniqueId);
-        return readerFragment;
+public class ReaderToolbarLayout extends RelativeLayout {
+    public ReaderToolbarLayout(Context context) {
+        super(context);
+        init();
     }
 
+    public ReaderToolbarLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
 
+    public ReaderToolbarLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
+
+    }
 }

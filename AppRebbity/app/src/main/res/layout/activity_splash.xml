@@ -11,4 +11,8 @@
         android:layout_height="fill_parent"
         android:src="@drawable/splash_logo" 
         android:scaleType="center" />
+    
+    <com.rebbity.widget.TestView
+        android:layout_width="400dp"
+        android:layout_height="200dp" />
 </RelativeLayout>

@@ -19,19 +19,25 @@
 package com.rebbity.cn;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.rebbity.constants.INTENT_CONST;
+import com.rebbity.reader.ReaderFragment;
 
-public class ReaderActivity extends ActionBarActivity {
+public class ReaderActivity extends BaseActivity {
+
+    private ReaderFragment mReaderFragment;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        int EssayId = intent.getIntExtra("essayid", 0);
+        int uniqueId = intent.getIntExtra(INTENT_CONST.KEY_READER_UNIQUE_ID, 0);
+        mReaderFragment = ReaderFragment.createInstance(uniqueId);
 
 
 

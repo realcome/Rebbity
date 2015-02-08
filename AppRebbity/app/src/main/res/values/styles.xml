@@ -17,7 +17,12 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@drawable/windowbg</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
         <!-- <item name="android:windowAnimationStyle">@style/WindowAnimStyle</item> -->
+    </style>
+
+    <style name="OverFlow" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more</item>
     </style>
 
     <!-- tyler -->

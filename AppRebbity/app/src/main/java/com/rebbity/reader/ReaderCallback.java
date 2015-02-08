@@ -18,21 +18,13 @@
 
 package com.rebbity.reader;
 
-import android.app.Fragment;
-import android.os.Bundle;
-
-import com.rebbity.constants.INTENT_CONST;
+import android.view.MotionEvent;
 
 /**
- * Created by Tyler on 15/2/6.
+ * Created by Tyler on 15/2/7.
  */
-public class ReaderFragment extends Fragment {
-    public static ReaderFragment createInstance(int uniqueId) {
-        ReaderFragment readerFragment = new ReaderFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(INTENT_CONST.KEY_READER_UNIQUE_ID, uniqueId);
-        return readerFragment;
-    }
+public interface ReaderCallback {
+    public void notifyScanMethodChanged();
 
-
+    public boolean filterEventForScanMethodChanged(MotionEvent event);
 }

@@ -16,23 +16,19 @@
  * limitations under the License.
  */
 
-package com.rebbity.reader;
-
-import android.app.Fragment;
-import android.os.Bundle;
-
-import com.rebbity.constants.INTENT_CONST;
+package com.rebbity.constants;
 
 /**
- * Created by Tyler on 15/2/6.
+ * Created by Tyler on 15/2/7.
  */
-public class ReaderFragment extends Fragment {
-    public static ReaderFragment createInstance(int uniqueId) {
-        ReaderFragment readerFragment = new ReaderFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(INTENT_CONST.KEY_READER_UNIQUE_ID, uniqueId);
-        return readerFragment;
-    }
+public class INTENT_CONST {
+    private final static String spliter = ".";
 
+    // Module: Reader
+    private final static String MODULE_READER = "reader" + spliter;
 
+    public final static String KEY_READER_SHARE_ID = MODULE_READER + "share_id";
+    public final static String KEY_READER_UNIQUE_ID = MODULE_READER + "unique_id";
+    public final static String KEY_READER_URL = MODULE_READER + "item_url";
+    public final static String KEY_READER_CONTEXT = MODULE_READER + "ui_context";
 }
