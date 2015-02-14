@@ -19,6 +19,7 @@
 package com.rebbity.cn;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -80,7 +81,6 @@ public class MainActivity extends BaseActivity {
         v.setPadding(v.getPaddingLeft(), v.getPaddingTop() + appendPaddingTop, v.getPaddingRight(), v.getPaddingBottom() + appendPaddingBottom);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -96,17 +96,24 @@ public class MainActivity extends BaseActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            ColorPicker colorPicker = new ColorPicker();
-            ColorPickListener listener = new ColorPickListener() {
-                @Override
-                public void notifyColorPicked(int color, boolean isOk) {
-                    Toast.makeText(MainActivity.this, ""+color, Toast.LENGTH_SHORT).show();
-                }
-            };
-            colorPicker.addColorPickedListener(listener);
-            colorPicker.show(getFragmentManager(), "colorpicker");
-            return true;
+        switch (id) {
+            case R.id.action_settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_help:
+
+                ColorPicker colorPicker = new ColorPicker();
+                ColorPickListener listener = new ColorPickListener() {
+                    @Override
+                    public void notifyColorPicked(int color, boolean isOk) {
+                        Toast.makeText(MainActivity.this, ""+color, Toast.LENGTH_SHORT).show();
+                    }
+                };
+                colorPicker.addColorPickedListener(listener);
+                colorPicker.show(getFragmentManager(), "colorpicker");
+                return true;
+
         }
 
         return super.onOptionsItemSelected(item);

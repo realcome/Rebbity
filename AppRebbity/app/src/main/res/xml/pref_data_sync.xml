@@ -38,5 +38,4 @@
     <Preference
         android:id="@+id/clean_data"
         android:title="@string/pref_title_data_clean" />
-
 </PreferenceScreen>
