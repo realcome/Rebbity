@@ -44,7 +44,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         WindowUtils.setDarkStatusIconForFlyme(this, true);
         setToolbarLogo(R.drawable.toolbar_logo);

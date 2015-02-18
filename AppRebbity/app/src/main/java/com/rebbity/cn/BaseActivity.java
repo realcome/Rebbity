@@ -237,8 +237,4 @@ public class BaseActivity extends Activity{
     public static boolean isFlyme() {
         return RebbityApp.isFlyme();
     }
-
-    public void pickedColor(View view) {
-        Toast.makeText(this, "csdfsdf", Toast.LENGTH_LONG).show();
-    }
 }
